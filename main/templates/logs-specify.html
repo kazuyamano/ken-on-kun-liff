@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+<title>毎日検温くんβ-検索</title>
+<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>履歴を検索</h1>
+  </div>
+  <div class="module-container">
+    <form action="{{ url_for('sort_logs') }}" method=post autocomplete="on">
+      <div class="qa-area">
+        <div class="jcode-box" >
+          <div class="qa-set">
+            <div class="q-line">
+              <p>Myコードは？</p>
+            </div>
+            <div class="a-form">
+              <input type="text" name="jcode" id="input1" maxlength="7">
+            </div>
+          </div>
+          <div class="alert-line">
+            <p id="alert1"> ※ 半角英数字で７ケタ</p>
+          </div>
+        </div>
+      </div>
+      <div class="submit-area">
+        <button type="submit" class="module-button" id="enter-btn">これで検索</button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="container">
+    <form action="/" method=post>
+      <div class="submit-area">
+        <button type="submit" class="module-button" id="std-btn">TOPへ戻る</button>
+      </div>
+    </form>
+  </div>
+
+
+  <script>
+    //最初からid="input1"にカーソルを合わせておく
+      document.getElementById('input1').focus();
+    //input1に英数字で7桁埋まったら・・・
+      const input1 = document.querySelector("#input1");
+      input1.addEventListener("keyup", function(){
+        if (/([a-z]|[A-Z]|\d){7}/.test(this.value)) {
+          this.style.borderColor = "#66AB8D";
+          this.value = this.value.toUpperCase();
+          document.getElementById("alert1").textContent = "";
+        } else{
+          this.style.borderColor = "#d3d3d3";
+          document.getElementById("alert1").textContent = "※ 半角英数字で７ケタ";
+        }
+      },false);
+      input1.addEventListener("blur", function(){
+        if (/([a-z]|[A-Z]|\d){7}/.test(this.value)) {
+          this.value = this.value.toUpperCase();
+        } 
+      },false);
+      //input1が整ったらOKボタンを活性、色変更、マウスオーバー時ポインタに
+      const enterbtn = document.querySelector("#enter-btn");
+      const stdbtn = document.querySelector("#std-btn");
+      window.addEventListener("DOMContentLoaded", function(){
+        enterbtn.disabled = true;
+
+        input1.addEventListener("keyup", function(){
+          if (/([A-Z]|\d){7}/.test(input1.value)){
+            enterbtn.disabled = false;
+            enterbtn.style.backgroundColor = "#66AB8D";
+            enterbtn.style.cursor = "pointer";
+          } else{
+            enterbtn.disabled = true;
+            enterbtn.style.backgroundColor = "#d3d3d3";
+            enterbtn.style.cursor = "auto";
+          }
+        },false);
+
+        //ボタンマウスオーバーで緑を濃く
+        enterbtn.addEventListener("mouseover", function(){ 
+          enterbtn.style.backgroundColor = "#518F74";
+        },false);
+        enterbtn.addEventListener("mouseout", function(){ 
+          enterbtn.style.backgroundColor = "#66AB8D";
+        },false);
+        stdbtn.addEventListener("mouseover", function(){ 
+          stdbtn.style.backgroundColor = "#518F74";
+        },false);
+        stdbtn.addEventListener("mouseout", function(){ 
+          stdbtn.style.backgroundColor = "#66AB8D";
+        },false);
+      },false);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>毎日検温くんβ-履歴</title>
+    <link rel="stylesheet" href="../static/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{ specified_jcode }}の履歴</h1>
+    </div>
+    <div class="module-container">
+      <div class="logs-area">
+        <div class="logs-box">
+          <table class="logs-table" align=left>
+            <thead>
+               <tr>
+                <th>記録日時</th>
+                <th>体温</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for entry in sorted_result %}
+              <tr>
+                <td>{{entry.date.strftime('%a %m-%d %H:%M')}}</td>
+                <td>{{entry.temp}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <form action="/download/{{ specified_jcode }}/" method=post>
+          <div class="submit-area">
+            <button type="submit" class="module-button" id="download-btn">CSVでダウンロード</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container">
+      <form action="/" method=post>
+        <div class="submit-area">
+          <button type="submit" class="module-button" id="std-btn">TOPへ戻る</button>
+        </div>
+      </form>
+    </div>
+
+    <script type="text/javascript">
+      // ボタンマウスオーバーで緑を濃く
+      const dlbtn = document.querySelector("#download-btn");
+      const stdbtn = document.querySelector("#std-btn");
+      dlbtn.addEventListener("mouseover", function(){ 
+        dlbtn.style.backgroundColor = "#518F74";
+      },false);
+      dlbtn.addEventListener("mouseout", function(){ 
+        dlbtn.style.backgroundColor = "#66AB8D";
+      },false);
+      stdbtn.addEventListener("mouseover", function(){ 
+        stdbtn.style.backgroundColor = "#518F74";
+      },false);
+      stdbtn.addEventListener("mouseout", function(){ 
+        stdbtn.style.backgroundColor = "#66AB8D";
+      },false);
+    </script>
+  </body>
+</html>

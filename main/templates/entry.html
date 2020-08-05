@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <!--OGP共通設定(<head>内も含めて）-->
+    <meta property="og:title" content="毎日検温くんβ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ken-on-kun.herokuapp.com/">
+    <meta property="og:image" content="https://ken-on-kun.herokuapp.com/static/ken-on-OGP.png" />
+    <meta property="og:site_name" content="毎日検温くんβ">
+    <meta property="og:description" content="穏やかな日常が戻るまで、日々のお手間を少しずつお手伝いします。体温の記録、ちょこっとメモ、履歴のCSV出力も。" />
+    <!--OGP　Facebook用設定 -->
+    <meta property="fb:admins" content="107923369300430" />
+    <!--OGP　Twitter共通設定 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@kazuyamano" />
+    <!--レスポンシブ設定-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <!--FontAwsome設定-->
+    <script src="https://kit.fontawesome.com/274888a063.js" crossorigin="anonymous"></script>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>毎日検温くんβ</title>
+  </head>
+  <body>
+    <div id="top-container">
+      <img id="top-img" src="../static/ken-on-top.png">
+    </div>
+  
+    <div class="module-container">
+      <form action="{{ url_for('add_entry') }}" method=post autocomplete="on">
+        <div class="qa-area">
+          <div class="jcode-box" >
+            <div class="qa-set">
+              <div class="q-line">
+                <p>Myコードは？</p>
+              </div>
+              <div class="a-form">
+                <input type="text" name="jcode" id="input1" maxlength="7">
+              </div>
+            </div>
+            <div class="alert-line">
+              <p id="alert1"> ※ 任意の英数字で７ケタ</p>
+            </div>
+          </div>
+          <div class="temp-box">
+            <div class="qa-set">
+              <div class="q-line">
+                <p>体温は？</p>
+              </div>
+              <div class="a-form">
+                <input type="text" name="temp" id="input2" maxlength="4">
+              </div>
+            </div>
+            <div class="alert-line">
+              <p id="alert2"> ※ 35.0以上41.0未満</p>
+            </div>
+          </div>
+        </div>
+          
+        <div class="extra-area">
+          <div>
+            <button type="button" id="extra-btn">＋</button>
+          </div>
+          <div id="extra-box">
+            <div class="checkbox-set">
+              <div class="extra-checkbox">
+                <input type="checkbox" name="breathlessness" value="1" id="input3"> 息つらい
+                <input type="hidden" name="breathlessness" value="0" id="input3">
+              </div>
+              <div class="extra-checkbox">
+                <input type="checkbox" name="dullness" value="1" id="input4"> 体だるい
+                <input type="hidden" name="dullness" value="0" id="input4">
+              </div>
+            </div>
+            <div class="extra-commnent">
+              <input type="text" name="comment" placeholder="その他メモ"　id="input5">
+            </div>
+          </div>
+        </div>
+
+        <div class="submit-area">
+          <button type="submit" class="module-button" id="enter-btn">これで記録</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="module-container">
+      <div class="logs-area">
+        <p>[新着５件]</p>
+        <div class="logs-box5">
+          <table class="logs-table" align=left>
+            <thead>
+              <!-- trは列要素 -->
+              <tr>
+                <!-- thは見出しセル（自動で太字中央寄せ）-->
+                <th>記録日時</th>
+                <th>体温</th>
+                <th>Myコード</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for entry in entries_head %}
+              <tr>
+                <!-- tdは通常セル -->
+                <td>{{entry.date.strftime('%a %m-%d %H:%M')}}</td>
+                <td>{{entry.temp}}</td>
+                <td>{{entry.jcode}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <form action="{{ url_for('specify_logs') }}" method=post>
+        <div class="submit-area">
+          <button type="submit" class="module-button" id="std-btn">履歴を検索</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="line-container">
+      <a href="https://lin.ee/CGECIiB" rel="nofollow" target="_blank">
+        <img src="../static/line-QRcode.png" id="line-qrcode">
+        <img src="../static/line-logo.png" id="line-logo" width="230">
+      </a>
+      <p id="line-comment">↑LINEアプリから使いやすく↑</p>
+    </div>
+
+    <div class="sns-container">
+      <a href="https://twitter.com/share?url=https://ken-on-kun.herokuapp.com/" rel="nofollow" target="_blank">
+        <button class="link-btn" id="twitter-btn">
+          <i class="fab fa-twitter"> シェア</i>
+        </button>
+      </a>
+      <a href="http://www.facebook.com/share.php?u=https://ken-on-kun.herokuapp.com/" rel="nofollow" target="_blank">
+        <button class="link-btn" id="facebook-btn">
+          <i class="fab fa-facebook-f"> シェア</i>
+        </button>
+      </a>
+    </div>
+
+    <div class="admin-container">
+      <p id="admin-head">つくった人</p>
+      <img src="../static/self.png" id="self-img" width="60">
+      <p id="admin-comment">プログラミング初学者が</p>
+      <p id="admin-comment">庭いじりの風情でやっております</p>
+      <div class="admin-link-box">
+        <a href="https://github.com/kazuyamano/ken-on-kun" rel="nofollow" target="_blank">
+        <button class="link-btn-angular" id="github-btn">
+          <i class="fab fa-github"></i>
+        </button>
+        </a><a href="https://twitter.com/kazuyamano" rel="nofollow" target="_blank">
+          <button class="link-btn-angular" id="twitter-btn2">
+            <i class="fab fa-twitter"></i>
+          </button>
+        </a>  
+        <a href="https://note.com/ymkz" rel="nofollow" target="_blank">
+          <button class="link-btn-angular" id="note-btn">
+            <img src="../static/note-logo.png" width="24"></i>
+          </button>
+        </a>
+      </div>  
+    </div>
+    
+
+
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script type="text/javascript">
+    /**
+    * Initialize LIFF
+    * @param {string} myLiffId The LIFF ID of the selected element
+    */
+    function initializeLiff(myLiffId) {
+        liff
+            .init({
+                liffId: myLiffId
+            })
+            .then(() => {
+                // start to use LIFF's api
+                initializeApp();
+            })
+            .catch((err) => {
+                document.getElementById("liffAppContent").classList.add('hidden');
+                document.getElementById("liffInitErrorMessage").classList.remove('hidden');
+            });
+    }
+
+      const input1 = document.querySelector("#input1");   //id名を#で指定
+      const input2 = document.querySelector("#input2");
+      //最初からid="input1"にカーソルを合わせておく
+      document.getElementById('input1').focus();
+      //input1に英数字で7桁埋まったら・・・
+      input1.addEventListener("keyup", function(){    // id=”input1"内でキーを押して離したら発火、{}内を作動
+        if (/([0-9a-zA-Z]){7}/.test(this.value)) {
+          this.style.borderColor = "#66AB8D";
+          this.value = this.value.toUpperCase();  // 小文字を大文字に変換
+          document.getElementById("alert1").textContent = ""; //アラート文を非表示に
+        } else{
+          this.style.borderColor = "#d3d3d3";
+          document.getElementById("alert1").textContent = "※ 半角英数字で７ケタ";
+        }
+      },false);
+      input1.addEventListener("blur", function(){    // id=”input1"がフォーカスを失ったら、{}内を作動
+        if (/([0-9a-zA-Z]){7}/.test(this.value)) {
+          this.value = this.value.toUpperCase();  // 小文字を大文字に変換
+        } 
+      },false);
+      //input2に”35.0〜40.9までの数"が入ったら・・・
+      input2.addEventListener("keyup", function(){ 
+        const temperature = Number(input2.value);
+        if (temperature>=35 && temperature<41) {
+          this.style.borderColor = "#66AB8D";
+          document.getElementById("alert2").textContent = "";
+        } else{
+          this.style.borderColor = "#d3d3d3";
+          document.getElementById("alert2").textContent = "※ 35.0以上41.0未満";
+        }
+      },false);
+      //input1と2が整ったらOKボタンを活性、色変更、マウスオーバー時ポインタに
+      const enterbtn = document.querySelector("#enter-btn");
+      const extrabtn = document.querySelector("#extra-btn");
+      const extrabox = document.querySelector("#extra-box");
+      const stdbtn = document.querySelector("#std-btn");
+      window.addEventListener("DOMContentLoaded", function(){
+        extrabtn.disabled = true;
+        enterbtn.disabled = true;
+        extrabox.style.display ="none";
+        //input1編集中を対象に記述
+        input1.addEventListener("keyup", function(){
+          const temperature = Number(input2.value);
+          if (/([A-Z\d]){7}/.test(input1.value) && (temperature>=35 && temperature<41)){
+            enterbtn.disabled = false;
+            extrabtn.disabled = false;
+            enterbtn.style.backgroundColor = "#66AB8D";
+            extrabtn.style.backgroundColor = "#66AB8D";
+            enterbtn.style.cursor = "pointer";
+            extrabtn.style.cursor = "pointer";
+          } else{
+            enterbtn.disabled = true;
+            extrabtn.disabled = true;
+            enterbtn.style.backgroundColor = "#d3d3d3";
+            extrabtn.style.backgroundColor = "#d3d3d3";
+            enterbtn.style.cursor = "auto";
+            extrabtn.style.cursor = "auto";
+          }
+        },false);
+        //input2編集中でも同じ動きが起こるようコピペ
+        input2.addEventListener("keyup", function(){
+          const temperature = Number(input2.value);
+          if (/([A-Z\d]){7}/.test(input1.value) && (temperature>=35 && temperature<41)) {
+            enterbtn.disabled = false;
+            extrabtn.disabled = false;
+            enterbtn.style.backgroundColor = "#66AB8D";
+            extrabtn.style.backgroundColor = "#66AB8D";
+            enterbtn.style.cursor = "pointer";
+            extrabtn.style.cursor = "pointer";
+          } else{
+            enterbtn.disabled = true;
+            extrabtn.disabled = true;
+            enterbtn.style.backgroundColor = "#d3d3d3";
+            extrabtn.style.backgroundColor = "#d3d3d3";
+            enterbtn.style.cursor = "auto";
+            extrabtn.style.cursor = "auto";
+          }
+        },false);
+
+        //extra-btnを押したらextra-boxが開く
+        extrabtn.addEventListener("click", function(){ 
+          if(extrabox.style.display=="block"){
+		        extrabox.style.display ="none";
+            extrabtn.innerHTML = "＋";
+	        }else{
+	        	extrabox.style.display ="block";
+            extrabtn.innerHTML = "－";
+	        }
+        },false);
+        //ボタンマウスオーバーで緑を濃く
+        enterbtn.addEventListener("mouseover", function(){ 
+          enterbtn.style.backgroundColor = "#518F74";
+        },false);
+        enterbtn.addEventListener("mouseout", function(){ 
+          enterbtn.style.backgroundColor = "#66AB8D";
+        },false);
+        extrabtn.addEventListener("mouseover", function(){ 
+          extrabtn.style.backgroundColor = "#518F74";
+        },false);
+        extrabtn.addEventListener("mouseout", function(){ 
+          extrabtn.style.backgroundColor = "#66AB8D";
+        },false);
+        stdbtn.addEventListener("mouseover", function(){ 
+          stdbtn.style.backgroundColor = "#518F74";
+        },false);
+        stdbtn.addEventListener("mouseout", function(){ 
+          stdbtn.style.backgroundColor = "#66AB8D";
+        },false);
+      },false);
+    </script>
+  </body>
+</html>
+
+
