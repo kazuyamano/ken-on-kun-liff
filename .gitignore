@@ -1,0 +1,9 @@
+#ディレクトリ単位
+__pycache__
+old
+venv
+
+#ファイル単位
+test.py
+test.db
+.DS_Store
