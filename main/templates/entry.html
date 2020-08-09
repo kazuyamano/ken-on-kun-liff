@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>毎日検温くんβ</title>
+
     <!--OGP共通設定(<head>内も含めて）-->
     <meta property="og:title" content="毎日検温くんβ" />
     <meta property="og:type" content="website" />
@@ -17,10 +21,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <!--FontAwsome設定-->
     <script src="https://kit.fontawesome.com/274888a063.js" crossorigin="anonymous"></script>
+    <!--LINEliffアプリのSDKを取得-->
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>  
 
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../static/style.css">
-    <title>毎日検温くんβ</title>
   </head>
   <body>
     <div id="top-container">
@@ -165,17 +168,37 @@
     </div>
     
 
-<!--
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/1.0/sdk.js">
-    liff.init(
-      data => {
-        const userId = data.context.userId;
-      },
-      err => {
-      }
-    )
--->
     <script type="text/javascript">
+    // LIFFの初期化を行う
+      liff.init({
+        liffId: "1654645019-3zWnwABb"
+      })
+      .then(() => {
+        // 利用者のLINEアカウントのプロフィール名を取得
+        liff.getProfile().then(profile => {
+        const name = profile.displayName
+        // HTMLに挿入
+        document.querySelector("#name").innerText = name
+        })
+      })
+
+//      function initializeLiff(myLiffId) {
+//        liff
+//          .init({
+//              liffId: "1654645019-3zWnwABb"
+//          })
+//          .then(() => {
+//              // start to use LIFF's api
+//              initializeApp();
+//          })
+//          .catch((err) => {
+//              document.getElementById("liffAppContent").classList.add('hidden');
+//              document.getElementById("liffInitErrorMessage").classList.remove('hidden');
+//          });
+//      }
+
+    
+    //動的UIの処理
       const input1 = document.querySelector("#input1");   //id名を#で指定
       const input2 = document.querySelector("#input2");
       //最初からid="input1"にカーソルを合わせておく
