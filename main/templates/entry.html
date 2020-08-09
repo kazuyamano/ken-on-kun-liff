@@ -165,28 +165,17 @@
     </div>
     
 
-
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<!--
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/1.0/sdk.js">
+    liff.init(
+      data => {
+        const userId = data.context.userId;
+      },
+      err => {
+      }
+    )
+-->
     <script type="text/javascript">
-    /**
-    * Initialize LIFF
-    * @param {string} myLiffId The LIFF ID of the selected element
-    */
-    function initializeLiff(myLiffId) {
-        liff
-            .init({
-                liffId: myLiffId
-            })
-            .then(() => {
-                // start to use LIFF's api
-                initializeApp();
-            })
-            .catch((err) => {
-                document.getElementById("liffAppContent").classList.add('hidden');
-                document.getElementById("liffInitErrorMessage").classList.remove('hidden');
-            });
-    }
-
       const input1 = document.querySelector("#input1");   //id名を#で指定
       const input2 = document.querySelector("#input2");
       //最初からid="input1"にカーソルを合わせておく
