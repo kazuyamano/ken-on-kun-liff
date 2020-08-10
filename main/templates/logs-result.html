@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>{{ specified_jcode }}の履歴</h1>
+      <h1>{{ specified_jcode }}<span id="name"></span>の履歴</h1>
     </div>
     <div class="module-container">
       <div class="logs-area">
@@ -46,6 +46,19 @@
     </div>
 
     <script type="text/javascript">
+    // LIFFの初期化を行う
+      liff.init({
+        liffId: "1654645019-3zWnwABb"
+      })
+      .then(() => {
+        // 利用者のLINEアカウントのプロフィール名を取得
+        liff.getProfile().then(profile => {
+        const name = profile.displayName
+        // HTMLに挿入
+        document.querySelector("#name").innerText = name
+        })
+      })
+  
       // ボタンマウスオーバーで緑を濃く
       const dlbtn = document.querySelector("#download-btn");
       const stdbtn = document.querySelector("#std-btn");
