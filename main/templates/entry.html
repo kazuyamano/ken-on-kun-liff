@@ -177,9 +177,11 @@
           });
       }
       liff.init(() => {
-        const name = liff.getProfile();
-        // HTMLに挿入
-        document.querySelector("#name").innerText = name;
+        liff.getProfile().then(profile => {
+          const name = profile.displayName
+          // HTMLに挿入
+          document.querySelector("#name").innerText = name;
+        })
       });
     
     //動的UIの処理
