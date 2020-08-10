@@ -150,17 +150,17 @@
 
     <script type="text/javascript">
     // LIFFの初期化を行う
-//      liff.init({
-//        liffId: "1654645019-3zWnwABb"
-//      })
-//      .then(() => {
-//        // 利用者のLINEアカウントのプロフィール名を取得
-//        liff.getProfile().then(profile => {
-//        const name = profile.displayName
-//        // HTMLに挿入
-//        document.querySelector("#name").innerText = name
-//        })
-//      })
+      liff.init({
+        liffId: "1654645019-3zWnwABb"
+      })
+      .then(() => {
+        // 利用者のLINEアカウントのプロフィール名を取得
+        liff.getProfile().then(profile => {
+        const name = profile.displayName
+        // HTMLに挿入
+      document.querySelector("#name").innerText = name
+        })
+      })
 
       function initializeLiff(myLiffId) {
         liff
