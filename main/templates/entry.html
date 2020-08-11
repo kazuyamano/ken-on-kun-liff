@@ -149,18 +149,18 @@
     
 
     <script type="text/javascript">
-    // LIFFの初期化を行う
-      liff.init({
-        liffId: "1654645019-3zWnwABb"
-      })
-      .then(() => {
-        // 利用者のLINEアカウントのプロフィール名を取得
-        liff.getProfile().then(profile => {
-        const name = profile.displayName
-        // HTMLに挿入
-      document.querySelector("#name").innerText = name
-        })
-      })
+//    // LIFFの初期化を行う
+//      liff.init({
+//        liffId: "1654645019-3zWnwABb"
+//      })
+//      .then(() => {
+//        // 利用者のLINEアカウントのプロフィール名を取得
+//        liff.getProfile().then(profile => {
+//        const name = profile.displayName
+//        // HTMLに挿入
+//        document.querySelector("#name").innerText = name
+//        })
+//      })
 
       function initializeLiff(myLiffId) {
         liff
@@ -176,13 +176,12 @@
               document.getElementById("liffInitErrorMessage").classList.remove('hidden');
           });
       }
-      liff.init(() => {
-        liff.getProfile().then(profile => {
-          const name = profile.displayName
-          // HTMLに挿入
-          document.querySelector("#name").innerText = name;
-        })
-      });
+
+      liff.getProfile().then(profile => {
+        const name = profile.displayName
+        // HTMLに挿入
+        document.querySelector("#name").innerText = name
+      })
     
     //動的UIの処理
       const input1 = document.querySelector("#input1");   //id名を#で指定
