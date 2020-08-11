@@ -260,18 +260,19 @@
         },false);
       },false);
 
-//    // LIFFの初期化を行う
-//      liff.init({
-//        liffId: "1654645019-3zWnwABb"
-//      })
-//      .then(() => {
-//        // 利用者のLINEアカウントのプロフィール名を取得
-//        liff.getProfile().then(profile => {
-//        const name = profile.displayName
-//        // HTMLに挿入
-//        document.querySelector("#name").innerText = name
-//        })
-//      })
+    // LIFFの初期化を行う
+      liff.init({
+        liffId: "1654645019-3zWnwABb"
+      })
+      .then(() => {
+        // 利用者のLINEアカウントのプロフィール名を取得
+        liff.getProfile()
+          .then(profile => {
+            const name = profile.displayName
+            // HTMLに挿入
+            document.querySelector("#name").innerText = name
+          })
+      })
 
       // LIFFの初期化を行う
       liff
@@ -290,7 +291,7 @@
       liff.getProfile()
         .then(profile => {
           const name = profile.displayName
-          // HTML内の<id=name>に挿入
+          // HTML内の<id=name>に.innertextで挿入
           document.querySelector("#name").innerText = name
       });
     
