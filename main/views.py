@@ -23,7 +23,8 @@ def add_entry():
             ,date =datetime.datetime.now()\
             ,comment =flask.request.form['comment']\
             ,breathlessness =flask.request.form['breathlessness']\
-            ,dullness =flask.request.form['dullness'])
+            ,dullness =flask.request.form['dullness']\
+            ,line_name =flask.request.form['line_name'])
     db.session.add(entry)
     db.session.commit()
     specified_jcode = request.form.get('jcode')
@@ -56,9 +57,9 @@ def download_csv(key):
         for i in Entry.query.all():
             writer.writerow([i.id, i.jcode, i.date, i.temp, i.breathlessness, i.dullness, i.comment])
     else:
-        writer.writerow(['記録ID','Myコード','記録日時','体温','息つらい','体だるい','その他メモ'])
+        writer.writerow(['記録ID','Myコード','LINEの表示名','記録日時','体温','息つらい','体だるい','その他メモ'])
         for i in Entry.query.filter(Entry.jcode == key).all():
-            writer.writerow([i.id, i.jcode, i.date.strftime('%a %m-%d %H:%M'), i.temp, i.breathlessness, i.dullness, i.comment])
+            writer.writerow([i.id, i.jcode, i.line_name ,i.date.strftime('%a %m-%d %H:%M'), i.temp, i.breathlessness, i.dullness, i.comment])
 
     res = make_response()
     res.data = f.getvalue()

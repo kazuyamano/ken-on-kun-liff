@@ -82,7 +82,8 @@
             </div>
           </div>
         </div>
-
+        <!--LINEプロフィール名送信テスト-->
+        <input type="hidden" name="line_name" value="0" id="name">
         <div class="submit-area">
           <button type="submit" class="module-button" id="enter-btn">これで記録</button>
         </div>
@@ -260,19 +261,6 @@
         },false);
       },false);
 
-    // LIFFの初期化を行う
-//      liff.init({
-//        liffId: "1654645019-3zWnwABb"
-//      })
-//      .then(() => {
-//        // 利用者のLINEアカウントのプロフィール名を取得
-//        liff.getProfile()
-//          .then(profile => {
-//            const name = profile.displayName
-//            // HTMLに挿入
-//            document.querySelector("#name").innerText = name
-//          })
-//      })
 
       // LIFFの初期化を行う
       liff

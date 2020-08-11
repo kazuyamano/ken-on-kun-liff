@@ -10,6 +10,7 @@ class Entry(db.Model):
     breathlessness = db.Column(db.String)
     dullness = db.Column(db.String)
     comment = db.Column(db.String)
+    line_name = db.Column(db.String)
 
     def __repr__(self):
         return "<Entry id={} jcode={!r} temp={} date={} breathlessness={!r} dullness={!r} comment={!r}>"\
