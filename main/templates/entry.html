@@ -149,40 +149,6 @@
     
 
     <script type="text/javascript">
-//    // LIFFの初期化を行う
-//      liff.init({
-//        liffId: "1654645019-3zWnwABb"
-//      })
-//      .then(() => {
-//        // 利用者のLINEアカウントのプロフィール名を取得
-//        liff.getProfile().then(profile => {
-//        const name = profile.displayName
-//        // HTMLに挿入
-//        document.querySelector("#name").innerText = name
-//        })
-//      })
-
-      function initializeLiff(myLiffId) {
-        liff
-          .init({
-              liffId: "1654645019-3zWnwABb"
-          })
-          .then(() => {
-              // start to use LIFF's api
-              initializeApp();
-          })
-          .catch((err) => {
-              document.getElementById("liffAppContent").classList.add('hidden');
-              document.getElementById("liffInitErrorMessage").classList.remove('hidden');
-          });
-      }
-
-      liff.getProfile().then(profile => {
-        const name = profile.displayName
-        // HTMLに挿入
-        document.querySelector("#name").innerText = name
-      })
-    
     //動的UIの処理
       const input1 = document.querySelector("#input1");   //id名を#で指定
       const input2 = document.querySelector("#input2");
@@ -293,6 +259,40 @@
           stdbtn.style.backgroundColor = "#66AB8D";
         },false);
       },false);
+
+//    // LIFFの初期化を行う
+//      liff.init({
+//        liffId: "1654645019-3zWnwABb"
+//      })
+//      .then(() => {
+//        // 利用者のLINEアカウントのプロフィール名を取得
+//        liff.getProfile().then(profile => {
+//        const name = profile.displayName
+//        // HTMLに挿入
+//        document.querySelector("#name").innerText = name
+//        })
+//      })
+
+      liff
+        .init({
+            liffId: "1654645019-3zWnwABb"
+        })
+        .then(() => {
+            // start to use LIFF's api
+            initializeApp();
+        })
+        .catch((err) => {
+            document.getElementById("liffAppContent").classList.add('hidden');
+            document.getElementById("liffInitErrorMessage").classList.remove('hidden');
+        });
+
+
+      liff.getProfile().then(profile => {
+        const name = profile.displayName
+        // HTMLに挿入
+        document.querySelector("#name").innerText = name
+      });
+    
     </script>
   </body>
 </html>
