@@ -273,24 +273,25 @@
 //        })
 //      })
 
+      // LIFFの初期化を行う
       liff
         .init({
-            liffId: "1654645019-3zWnwABb"
+          liffId: "1654645019-3zWnwABb"
         })
         .then(() => {
-            // start to use LIFF's api
-            initializeApp();
+          // Start to use liff's api
         })
         .catch((err) => {
-            document.getElementById("liffAppContent").classList.add('hidden');
-            document.getElementById("liffInitErrorMessage").classList.remove('hidden');
+          // Error happens during initialization
+          console.log(err.code, err.message);
         });
 
 
-      liff.getProfile().then(profile => {
-        const name = profile.displayName
-        // HTMLに挿入
-        document.querySelector("#name").innerText = name
+      liff.getProfile()
+        .then(profile => {
+          const name = profile.displayName
+          // HTML内の<id=name>に挿入
+          document.querySelector("#name").innerText = name
       });
     
     </script>
