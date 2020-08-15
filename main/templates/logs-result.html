@@ -11,7 +11,7 @@
   </head>
   <body>
     <div class="container">
-      <h1><span id="name">name</span>さんの履歴</h1>
+      <h1>{{ specified_name }}さんの履歴</h1>
       
     </div>
     <div class="module-container">
@@ -50,17 +50,6 @@
     </div>
 
     <script type="text/javascript">
-      // LIFFの初期化を行う
-      liff.init({
-        liffId: "1654645019-3zWnwABb"
-      })
-      .then(() => {
-        liff.getProfile().then(profile => {
-        const name = profile.displayName
-        document.querySelector("#name").innerText = name
-        })
-      })
-  
       // ボタンマウスオーバーで緑を濃く
       const dlbtn = document.querySelector("#download-btn");
       const stdbtn = document.querySelector("#std-btn");
