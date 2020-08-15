@@ -155,26 +155,7 @@
     
 
     <script type="text/javascript">
-//      const input1 = document.querySelector("#input1");   //id名を#で指定
       const input2 = document.querySelector("#input2");
-        //最初からid="input1"にカーソルを合わせておく
-//      document.getElementById('input1').focus();
-//      //input1に英数字で7桁埋まったら・・・
-//      input1.addEventListener("keyup", function(){    // id=”input1"内でキーを押して離したら発火、{}内を作動
-//        if (/([0-9a-zA-Z]){7}/.test(this.value)) {
-//          this.style.borderColor = "#66AB8D";
-//          this.value = this.value.toUpperCase();  // 小文字を大文字に変換
-//          document.getElementById("alert1").textContent = ""; //アラート文を非表示に
-//        } else{
-//          this.style.borderColor = "#d3d3d3";
-//          document.getElementById("alert1").textContent = "※ 半角英数字で７ケタ";
-//        }
-//      },false);
-//      input1.addEventListener("blur", function(){    // id=”input1"がフォーカスを失ったら、{}内を作動
-//        if (/([0-9a-zA-Z]){7}/.test(this.value)) {
-//          this.value = this.value.toUpperCase();  // 小文字を大文字に変換
-//        } 
-//      },false);
       //input2に”35.0〜40.9までの数"が入ったら・・・
       input2.addEventListener("keyup", function(){ 
         const temperature = Number(input2.value);
@@ -195,92 +176,74 @@
         extrabtn.disabled = true;
         enterbtn.disabled = true;
         extrabox.style.display ="none";
-      input2.addEventListener("keyup", function(){
-        const temperature = Number(input2.value);
-        if (temperature>=35 && temperature<41) {
-          enterbtn.disabled = false;
-          extrabtn.disabled = false;
+
+        input2.addEventListener("keyup", function(){
+          const temperature = Number(input2.value);
+          if (temperature>=35 && temperature<41) {
+            enterbtn.disabled = false;
+            extrabtn.disabled = false;
+            enterbtn.style.backgroundColor = "#66AB8D";
+            extrabtn.style.backgroundColor = "#66AB8D";
+            enterbtn.style.cursor = "pointer";
+            extrabtn.style.cursor = "pointer";
+          } else{
+            enterbtn.disabled = true;
+            extrabtn.disabled = true;
+            enterbtn.style.backgroundColor = "#d3d3d3";
+            extrabtn.style.backgroundColor = "#d3d3d3";
+            enterbtn.style.cursor = "auto";
+            extrabtn.style.cursor = "auto";
+          }
+        },false);
+
+        //extra-btnを押したらextra-boxが開く
+        extrabtn.addEventListener("click", function(){ 
+          if(extrabox.style.display=="block"){
+            extrabox.style.display ="none";
+            extrabtn.innerHTML = "＋";
+          }else{
+            extrabox.style.display ="block";
+            extrabtn.innerHTML = "－";
+          }
+        },false);
+        //ボタンマウスオーバーで緑を濃く
+        enterbtn.addEventListener("mouseover", function(){ 
+          enterbtn.style.backgroundColor = "#518F74";
+        },false);
+        enterbtn.addEventListener("mouseout", function(){ 
           enterbtn.style.backgroundColor = "#66AB8D";
+        },false);
+        extrabtn.addEventListener("mouseover", function(){ 
+          extrabtn.style.backgroundColor = "#518F74";
+        },false);
+        extrabtn.addEventListener("mouseout", function(){ 
           extrabtn.style.backgroundColor = "#66AB8D";
-          enterbtn.style.cursor = "pointer";
-          extrabtn.style.cursor = "pointer";
-        } else{
-          enterbtn.disabled = true;
-          extrabtn.disabled = true;
-          enterbtn.style.backgroundColor = "#d3d3d3";
-          extrabtn.style.backgroundColor = "#d3d3d3";
-          enterbtn.style.cursor = "auto";
-          extrabtn.style.cursor = "auto";
-        }
+        },false);
+        stdbtn.addEventListener("mouseover", function(){ 
+          stdbtn.style.backgroundColor = "#518F74";
+        },false);
+        stdbtn.addEventListener("mouseout", function(){ 
+          stdbtn.style.backgroundColor = "#66AB8D";
+        },false);
       },false);
-//        //input1編集中を対象に記述
-//        input1.addEventListener("keyup", function(){
-//          const temperature = Number(input2.value);
-//          if (/([A-Z\d]){7}/.test(input1.value) && (temperature>=35 && temperature<41)){
-//            enterbtn.disabled = false;
-//            extrabtn.disabled = false;
-//            enterbtn.style.backgroundColor = "#66AB8D";
-//            extrabtn.style.backgroundColor = "#66AB8D";
-//            enterbtn.style.cursor = "pointer";
-//            extrabtn.style.cursor = "pointer";
-//          } else{
-//            enterbtn.disabled = true;
-//            extrabtn.disabled = true;
-//            enterbtn.style.backgroundColor = "#d3d3d3";
-//            extrabtn.style.backgroundColor = "#d3d3d3";
-//            enterbtn.style.cursor = "auto";
-//            extrabtn.style.cursor = "auto";
-//          }
-//        },false);
 
-      //extra-btnを押したらextra-boxが開く
-      extrabtn.addEventListener("click", function(){ 
-        if(extrabox.style.display=="block"){
-          extrabox.style.display ="none";
-          extrabtn.innerHTML = "＋";
-        }else{
-          extrabox.style.display ="block";
-          extrabtn.innerHTML = "－";
-        }
-      },false);
-      //ボタンマウスオーバーで緑を濃く
-      enterbtn.addEventListener("mouseover", function(){ 
-        enterbtn.style.backgroundColor = "#518F74";
-      },false);
-      enterbtn.addEventListener("mouseout", function(){ 
-        enterbtn.style.backgroundColor = "#66AB8D";
-      },false);
-      extrabtn.addEventListener("mouseover", function(){ 
-        extrabtn.style.backgroundColor = "#518F74";
-      },false);
-      extrabtn.addEventListener("mouseout", function(){ 
-        extrabtn.style.backgroundColor = "#66AB8D";
-      },false);
-      stdbtn.addEventListener("mouseover", function(){ 
-        stdbtn.style.backgroundColor = "#518F74";
-      },false);
-      stdbtn.addEventListener("mouseout", function(){ 
-        stdbtn.style.backgroundColor = "#66AB8D";
-      },false);
-    },false);
-
-    // LIFFの初期化を行い、プロフィールを取得、getElementByIdでHTML内に代入
-    liff
-      .init({
-        liffId: "1654645019-3zWnwABb"
-      })
-      .then(() => {
-        liff.getProfile()
-          .then(profile => {
-            const name = profile.displayName
-            document.getElementById("name").innerText = name ;
-            document.getElementById("line_name").value = name ;
-          });
-      })
-      .catch((err) => {
-        // Error happens during initialization
-        console.log(err.code, err.message);
-      });
+      // LIFFの初期化を行い、プロフィールを取得、getElementByIdでHTML内に代入
+      liff
+        .init({
+          liffId: "1654645019-3zWnwABb"
+        })
+        .then(() => {
+          liff.getProfile()
+            .then(profile => {
+              const name = profile.displayName
+              document.getElementById("name").innerText = name ;
+              document.getElementById("line_name").value = name ;
+            });
+        })
+        .catch((err) => {
+          // Error happens during initialization
+          console.log(err.code, err.message);
+        });
     </script>
   </body>
 </html>
