@@ -227,8 +227,10 @@
               const name = profile.displayName
               const id = profile.userId
               //document.getElementById("line_id-test").innerText = id ;
-              document.querySelectorAll("#line_name-entry #line_name-logs").value = name ;
-              document.querySelectorAll("#line_id-entry #line_id-logs").value = id ;
+              document.querySelector("#line_name-entry").value = name ;
+              document.querySelector("#line_name-logs").value = name ;
+              document.querySelector("#line_id-entry").value = id ;
+              document.querySelector("#line_id-logs").value = id ;
             });
         })
         .catch((err) => {
