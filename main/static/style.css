@@ -36,6 +36,9 @@ h1 {
   padding-top: 20px;
   display: flex;  /* Flexboxで中の要素を横並列に */
 }
+.temp-box {
+  width: 240px
+}
 .extra-area {
   margin: 0px auto;
   text-align: center;
