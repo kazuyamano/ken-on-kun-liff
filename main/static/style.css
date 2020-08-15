@@ -51,7 +51,7 @@ h1 {
   margin: 0px auto;
 }
 
-.jcode-box, .temp-box {
+.temp-box {
   font-size: 18px;
   margin: 5px auto 0px auto;
 }
@@ -303,7 +303,7 @@ h1 {
     width: 100%;
     flex-direction: column;   /* FlexBoxでブロック要素を上下中央に */
   }
-  .jcode-box, .temp-box {
+  .temp-box {
     flex-wrap: wrap;
   }
   #enter-btn, #std-btn {
