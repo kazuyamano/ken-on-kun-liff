@@ -83,7 +83,8 @@
           </div>
         </div>
         <!--LINEプロフィール名送信テスト-->
-        <input type="text" name="line_name" id="line_name">
+        <input type="text" name="line_name" id="name" value="0">
+        <!--おわり-->
         <div class="submit-area">
           <button type="submit" class="module-button" id="enter-btn">これで記録</button>
         </div>
@@ -271,8 +272,9 @@
           liff.getProfile()
             .then(profile => {
               const name = profile.displayName
-              // HTML内に.innerTextで挿入
-              document.querySelector("#line_name").value = name
+              // HTML内の<id=name>に.innertextで挿入
+              document.querySelector("#name").value = "name" ;
+              document.querySelector("#name").innerText = name ;
             });
         })
         .catch((err) => {
