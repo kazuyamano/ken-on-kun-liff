@@ -26,7 +26,7 @@
 
   </head>
   <body class="container">
-    <div>Hello <span id="line_name">world</span>.</div>
+    <div>Hello <span id="name">world</span>.</div>
     <div id="top-container">
       <img id="top-img" src="../static/ken-on-top.png">
     </div>
@@ -83,7 +83,7 @@
           </div>
         </div>
         <!--LINEプロフィール名送信テスト-->
-        <input type="text" name="line_name" id="name" value="0">
+        <input type="text" name="line_name" id="line_name" value="0">
         <!--おわり-->
         <div class="submit-area">
           <button type="submit" class="module-button" id="enter-btn">これで記録</button>
@@ -273,14 +273,15 @@
             .then(profile => {
               const name = profile.displayName
               // HTML内の<id=name>に.innertextで挿入
-              document.querySelectorAll("#name").innerText = name ;
-              document.querySelectorAll("#name").value = "name" ;
-              
+              document.querySelector("#name").innerText = name ;
             });
         })
         .catch((err) => {
           // Error happens during initialization
           console.log(err.code, err.message);
+        });
+        window.addEventListener("DOMContentLoaded", function(){
+          document.getElementById("line_name").value = name;
         });
 
 
