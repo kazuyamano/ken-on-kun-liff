@@ -8,12 +8,8 @@ from io import StringIO
 import csv
 
 @app.route('/', methods=['get','post'])
-def show_entries():
-    entries_head = Entry.query\
-                    .order_by(desc(Entry.date))\
-                    .limit(5)\
-                    .all()
-    return flask.render_template('entry.html', entries_head=entries_head)
+def show_entry():
+    return flask.render_template('entry.html')
 
 @app.route('/entry-done', methods=['GET','POST'])
 def add_entry():

@@ -191,7 +191,7 @@
         },false);
       },false);
 
-      // LIFFの初期化を行い、プロフィールを取得、getElementByIdでHTML内に代入
+      // LIFFの初期化を行い、プロフィールを取得、document.querySelectorでHTML内に代入
       liff
         .init({
           liffId: "1654645019-3zWnwABb"
@@ -201,7 +201,6 @@
             .then(profile => {
               const name = profile.displayName
               const id = profile.userId
-              //document.getElementById("line_id-test").innerText = id ;
               document.querySelector("#line_name-entry").value = name ;
               document.querySelector("#line_name-logs").value = name ;
               document.querySelector("#line_id-entry").value = id ;
