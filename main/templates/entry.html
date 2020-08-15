@@ -26,9 +26,9 @@
 
   </head>
   <body class="container">
-<!--   
-    <div>Hello <span id="name">world</span>.</div> 
--->
+ 
+    <div>Hello <span id="line_id">world</span>.</div> 
+
     <div id="top-container">
       <img id="top-img" src="../static/ken-on-top.png">
     </div>
@@ -236,8 +236,10 @@
           liff.getProfile()
             .then(profile => {
               const name = profile.displayName
+              const id = profile.userId
               //document.getElementById("name").innerText = name ;
               document.getElementById("line_name").value = name ;
+              document.getElementById("line_id").value = id ;
             });
         })
         .catch((err) => {
