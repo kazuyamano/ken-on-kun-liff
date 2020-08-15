@@ -35,9 +35,9 @@ def add_entry():
                     .all()
     return flask.render_template('logs-result.html', specified_id=specified_id, specified_name=specified_name, sorted_result=sorted_result)
 
-@app.route('/logs-specify', methods=['get','post'])
-def specify_logs():
-    return flask.render_template('logs-specify.html')
+#@app.route('/logs-specify', methods=['get','post'])
+#def specify_logs():
+#    return flask.render_template('logs-specify.html')
 
 @app.route('/logs-result', methods=['post'])
 def sort_logs():

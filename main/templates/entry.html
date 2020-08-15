@@ -82,15 +82,14 @@
       </form>
     </div>
 
-    <div class="module-container">
-      <div class="logs-area">
+    <div class="container">
+<!--
+        <div class="logs-area">
         <p>[新着５件]</p>
         <div class="logs-box5">
           <table class="logs-table" align=left>
             <thead>
-              <!-- trは列要素 -->
               <tr>
-                <!-- thは見出しセル（自動で太字中央寄せ）-->
                 <th>記録日時</th>
                 <th>体温</th>
                 <th>LINE名</th>
@@ -99,7 +98,6 @@
             <tbody>
               {% for entry in entries_head %}
               <tr>
-                <!-- tdは通常セル -->
                 <td>{{entry.date.strftime('%a %m-%d %H:%M')}}</td>
                 <td>{{entry.temp}}</td>
                 <td>{{entry.line_name}}</td>
@@ -109,10 +107,10 @@
           </table>
         </div>
       </div>
-
-      <form action="{{ url_for('specify_logs') }}" method=post>
+-->
+      <form action="{{ url_for('sort_logs') }}" method=post>
         <div class="submit-area">
-          <button type="submit" class="module-button" id="std-btn">履歴を検索</button>
+          <button type="submit" class="module-button" id="std-btn">履歴を見る</button>
         </div>
       </form>
     </div>
