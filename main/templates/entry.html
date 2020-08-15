@@ -83,7 +83,7 @@
           </div>
         </div>
         <!--LINEプロフィール名送信テスト-->
-        <input type="text" name="line_name" id="name">
+        <input type="text" name="line_name" id="name" value="0">
         <!--おわり-->
         <div class="submit-area">
           <button type="submit" class="module-button" id="enter-btn">これで記録</button>
@@ -273,8 +273,8 @@
             .then(profile => {
               const name = profile.displayName
               // HTML内の<id=name>に.innertextで挿入
-              document.querySelector("#name").innerText = name
-              document.querySelector("#name").value = name
+              //document.querySelector("#name").innerText = name ;
+              document.getElementById("name").value = "name" ;
             });
         })
         .catch((err) => {
