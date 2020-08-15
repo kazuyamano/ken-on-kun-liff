@@ -273,8 +273,9 @@
             .then(profile => {
               const name = profile.displayName
               // HTML内の<id=name>に.innertextで挿入
-              document.querySelector("#name").value = "name" ;
-              document.querySelector("#name").innerText = name ;
+              document.querySelectorAll("#name").innerText = name ;
+              document.querySelectorAll("#name").value = "name" ;
+              
             });
         })
         .catch((err) => {
