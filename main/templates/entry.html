@@ -106,7 +106,7 @@
                 <!-- thは見出しセル（自動で太字中央寄せ）-->
                 <th>記録日時</th>
                 <th>体温</th>
-                <th>Myコード</th>
+                <th>LINE名</th>
               </tr>
             </thead>
             <tbody>
@@ -115,7 +115,7 @@
                 <!-- tdは通常セル -->
                 <td>{{entry.date.strftime('%a %m-%d %H:%M')}}</td>
                 <td>{{entry.temp}}</td>
-                <td>{{entry.jcode}}</td>
+                <td>{{entry.line_name}}</td>
               </tr>
               {% endfor %}
             </tbody>
