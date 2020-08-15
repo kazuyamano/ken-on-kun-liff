@@ -39,10 +39,10 @@ def add_entry():
 #def specify_logs():
 #    return flask.render_template('logs-specify.html')
 
-@app.route('/logs-result', methods=['post'])
+@app.route('/logs-result', methods=['GET','post'])
 def sort_logs():
     specified_id = request.form.get('line_id')
-    specified_name = request.form.get('line_name') 
+    specified_name = request.form.get('line_name')
     sorted_result = db.session.query(Entry)\
                     .filter(Entry.line_id == specified_id)\
                     .order_by(desc(Entry.date))\
