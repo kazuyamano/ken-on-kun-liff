@@ -59,7 +59,7 @@ def download_csv(key):
         for i in Entry.query.all():
             writer.writerow([i.id, i.line_id, i.line_name, i.date, i.temp, i.breathlessness, i.dullness, i.comment])
     else:
-        writer.writerow(['記録No','LINE-ID','LINE名','記録日時','体温','息つらい','体だるい','その他メモ'])
+        writer.writerow(['管理No','LINEユーザーID','LINE名','記録日時','体温','息つらい','体だるい','その他メモ'])
         for i in Entry.query.filter(Entry.line_id == key).all():
             writer.writerow([i.id, i.line_id, i.line_name ,i.date.strftime('%a %m-%d %H:%M'), i.temp, i.breathlessness, i.dullness, i.comment])
 
