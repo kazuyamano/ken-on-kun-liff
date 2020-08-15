@@ -83,32 +83,7 @@
     </div>
 
     <div class="container">
-<!--
-        <div class="logs-area">
-        <p>[新着５件]</p>
-        <div class="logs-box5">
-          <table class="logs-table" align=left>
-            <thead>
-              <tr>
-                <th>記録日時</th>
-                <th>体温</th>
-                <th>LINE名</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for entry in entries_head %}
-              <tr>
-                <td>{{entry.date.strftime('%a %m-%d %H:%M')}}</td>
-                <td>{{entry.temp}}</td>
-                <td>{{entry.line_name}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
--->
-      <form action="{{ url_for('sort_logs') }}" method=post>
+      <form action="{{ url_for('sort_logs') }}" method=post target="_blank">
         <!--LINEプロフィール送信エリア（非表示）-->
         <input type="hidden" name="line_id" id="line_id-logs">
         <input type="hidden" name="line_name" id="line_name-logs">
