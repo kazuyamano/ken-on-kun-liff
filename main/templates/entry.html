@@ -270,9 +270,9 @@
         .then(() => {
           liff.getProfile()
             .then(profile => {
-              const line_name = profile.displayName
+              const name = profile.displayName
               // HTML内に.innerTextで挿入
-              document.querySelector("#line_name").innerText = line_name
+              document.querySelector("#line_name").value = name
             });
         })
         .catch((err) => {
