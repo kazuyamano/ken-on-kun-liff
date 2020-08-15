@@ -26,9 +26,9 @@
 
   </head>
   <body class="container">
- 
+ <!--
     <div>Hello <span id="line_id">world</span>.</div> 
-
+-->
     <div id="top-container">
       <img id="top-img" src="../static/ken-on-top.png">
     </div>
@@ -36,21 +36,6 @@
     <div class="module-container">
       <form action="{{ url_for('add_entry') }}" method=post autocomplete="on">
         <div class="qa-area">
-<!--
-          <div class="jcode-box" >
-            <div class="qa-set">
-              <div class="q-line">
-                <p>Myコードは？</p>
-              </div>
-              <div class="a-form">
-                <input type="text" name="jcode" id="input1" maxlength="7">
-              </div>
-            </div>
-            <div class="alert-line">
-              <p id="alert1"> ※ 任意の英数字で７ケタ</p>
-            </div>
-          </div>
--->
           <!--体温入力エリア-->
           <div class="temp-box">
             <div class="qa-set">
@@ -87,8 +72,10 @@
             </div>
           </div>
         </div>
-        <!--LINEプロフィール名送信エリア（非表示）-->
-        <input type="hidden" name="line_name" id="line_name">        
+        <!--LINEプロフィール送信エリア（非表示）-->
+        <input type="hidden" name="line_id" id="line_id">
+        <input type="hidden" name="line_name" id="line_name">
+        <!--以上-->
         <div class="submit-area">
           <button type="submit" class="module-button" id="enter-btn">これで記録</button>
         </div>
@@ -239,7 +226,7 @@
               const id = profile.userId
               //document.getElementById("name").innerText = name ;
               document.getElementById("line_name").value = name ;
-              document.getElementById("line_id").innerText = id ;
+              document.getElementById("line_id").value = id ;
             });
         })
         .catch((err) => {

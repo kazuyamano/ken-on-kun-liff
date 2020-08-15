@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, timezone
 
 class Entry(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    line_id = db.Column(db.String)
     line_name = db.Column(db.String)
     temp = db.Column(db.Float)
     date = db.Column(db.DateTime)
@@ -12,8 +13,8 @@ class Entry(db.Model):
     comment = db.Column(db.String)
 
     def __repr__(self):
-        return "<Entry id={} line_name={!r} temp={} date={} breathlessness={!r} dullness={!r} comment={!r}>"\
-            .format(self.id, self.line_name, self.temp, self.date, self.breathlessness, self.dullness, self.comment)
+        return "<Entry id={} line_id={} line_name={!r} temp={} date={} breathlessness={!r} dullness={!r} comment={!r}>"\
+            .format(self.id, self.line_id, self.line_name, self.temp, self.date, self.breathlessness, self.dullness, self.comment)
 
 def init():
     db.create_all()

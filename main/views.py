@@ -18,20 +18,22 @@ def show_entries():
 @app.route('/entry-done', methods=['GET','POST'])
 def add_entry():
     entry = Entry(\
-            line_name =flask.request.form['line_name']\
-            ,temp=flask.request.form['temp']\
+            line_id =flask.request.form['line_id']\
+            ,line_name =flask.request.form['line_name']\
+            ,temp =flask.request.form['temp']\
             ,date =datetime.datetime.now()\
             ,breathlessness =flask.request.form['breathlessness']\
             ,dullness =flask.request.form['dullness']\
             ,comment =flask.request.form['comment'])
     db.session.add(entry)
     db.session.commit()
+    specified_id = request.form.get('line_id')
     specified_name = request.form.get('line_name')
     sorted_result = db.session.query(Entry)\
-                    .filter(Entry.line_name == specified_name)\
+                    .filter(Entry.line_id == specified_id)\
                     .order_by(desc(Entry.date))\
                     .all()
-    return flask.render_template('logs-result.html', specified_name=specified_name, sorted_result=sorted_result)
+    return flask.render_template('logs-result.html', specified_id=specified_id, specified_name=specified_name, sorted_result=sorted_result)
 
 @app.route('/logs-specify', methods=['get','post'])
 def specify_logs():
@@ -39,12 +41,13 @@ def specify_logs():
 
 @app.route('/logs-result', methods=['post'])
 def sort_logs():
+    specified_id = request.form.get('line_id')
     specified_name = request.form.get('line_name') 
     sorted_result = db.session.query(Entry)\
-                    .filter(Entry.line_name == specified_name)\
+                    .filter(Entry.line_id == specified_id)\
                     .order_by(desc(Entry.date))\
                     .all()
-    return flask.render_template('logs-result.html', specified_name=specified_name, sorted_result=sorted_result)
+    return flask.render_template('logs-result.html', specified_id=specified_id, specified_name=specified_name, sorted_result=sorted_result)
 
 @app.route('/download/<key>/', methods=['get','post'])
 def download_csv(key):
@@ -52,13 +55,13 @@ def download_csv(key):
     writer = csv.writer(f, quotechar='"', quoting=csv.QUOTE_ALL, lineterminator="\n")
 
     if key == 'all':
-        writer.writerow(['id','line_name','date','temp','breathlessness','dullness','comment'])
+        writer.writerow(['id','line_id','line_name','date','temp','breathlessness','dullness','comment'])
         for i in Entry.query.all():
-            writer.writerow([i.id, i.line_name, i.date, i.temp, i.breathlessness, i.dullness, i.comment])
+            writer.writerow([i.id, i.line_id, i.line_name, i.date, i.temp, i.breathlessness, i.dullness, i.comment])
     else:
-        writer.writerow(['記録ID','LINE名','記録日時','体温','息つらい','体だるい','その他メモ'])
-        for i in Entry.query.filter(Entry.line_name == key).all():
-            writer.writerow([i.id, i.line_name ,i.date.strftime('%a %m-%d %H:%M'), i.temp, i.breathlessness, i.dullness, i.comment])
+        writer.writerow(['記録No','LINE-ID','LINE名','記録日時','体温','息つらい','体だるい','その他メモ'])
+        for i in Entry.query.filter(Entry.line_id == key).all():
+            writer.writerow([i.id, i.line_id, i.line_name ,i.date.strftime('%a %m-%d %H:%M'), i.temp, i.breathlessness, i.dullness, i.comment])
 
     res = make_response()
     res.data = f.getvalue()
