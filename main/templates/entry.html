@@ -27,7 +27,7 @@
   </head>
   <body class="container">
  <!-
-    <div>Hello <span id="line_id">world</span>.</div> 
+    <div>Hello <span id="line_id-test">world</span>.</div> 
 -->
     <div id="top-container">
       <img id="top-img" src="../static/ken-on-top.png">
@@ -226,6 +226,7 @@
               const id = profile.userId
               //document.getElementById("name").innerText = name ;
               document.getElementById("line_name").value = name ;
+              document.getElementById("line_id-test").innerText = id ;
               document.getElementById("line_id").value = id ;
             });
         })
