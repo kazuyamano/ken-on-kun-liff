@@ -73,8 +73,8 @@
           </div>
         </div>
         <!--LINEプロフィール送信エリア（非表示）-->
-        <input type="hidden" name="line_id" id="line_id">
-        <input type="hidden" name="line_name" id="line_name">
+        <input type="hidden" name="line_id" id="line_id-entry">
+        <input type="hidden" name="line_name" id="line_name-entry">
         <!--以上-->
         <div class="submit-area">
           <button type="submit" class="module-button" id="enter-btn">これで記録</button>
@@ -110,8 +110,8 @@
 -->
       <form action="{{ url_for('sort_logs') }}" method=post>
         <!--LINEプロフィール送信エリア（非表示）-->
-        <input type="hidden" name="line_id" id="line_id">
-        <input type="hidden" name="line_name" id="line_name">
+        <input type="hidden" name="line_id" id="line_id-logs">
+        <input type="hidden" name="line_name" id="line_name-logs">
         <!--以上-->
         <div class="submit-area">
           <button type="submit" class="module-button" id="std-btn">履歴を見る</button>
@@ -227,8 +227,8 @@
               const name = profile.displayName
               const id = profile.userId
               //document.getElementById("line_id-test").innerText = id ;
-              document.querySelectorAll("#line_name").value = name ;
-              document.querySelectorAll("#line_id").value = id ;
+              document.querySelectorAll("#line_name-entry #line_name-logs").value = name ;
+              document.querySelectorAll("#line_id-entry #line_id-logs").value = id ;
             });
         })
         .catch((err) => {
