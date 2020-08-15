@@ -109,6 +109,10 @@
       </div>
 -->
       <form action="{{ url_for('sort_logs') }}" method=post>
+        <!--LINEプロフィール送信エリア（非表示）-->
+        <input type="hidden" name="line_id" id="line_id">
+        <input type="hidden" name="line_name" id="line_name">
+        <!--以上-->
         <div class="submit-area">
           <button type="submit" class="module-button" id="std-btn">履歴を見る</button>
         </div>
