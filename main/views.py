@@ -62,11 +62,12 @@ def download_csv(key):
         writer.writerow(['管理No','LINE名','記録日時','体温','息つらい','体だるい','その他メモ'])
         for i in Entry.query.filter(Entry.line_id == key).all():
             writer.writerow([i.id, i.line_name ,i.date.strftime('%a %m-%d %H:%M'), i.temp, i.breathlessness, i.dullness, i.comment])
-    downloadedat = datetime.datetime.now()
+    
+    dt_now = datetime.datetime.now()
     res = make_response()
     res.data = f.getvalue()
     res.headers['Content-Type'] = 'text/csv'
-    res.headers['Content-Disposition'] = 'attachment; filename = ken-on-log_.csv'
+    res.headers['Content-Disposition'] = 'attachment; filename = ken-on-log_'+ dt_now.strftime('%Y%m%d-%H:%M:%S') +'.csv'
     return res
 
 
