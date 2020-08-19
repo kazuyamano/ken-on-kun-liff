@@ -213,6 +213,11 @@ h1 {
   padding: 0em 0.3em; /* 1emは文字の高さ1つ分。２つ指定の場合は上下値 左右値 */
 }
 
+#prev-version {
+  text-align: center;
+  margin-top: 80px;
+}
+
 .line-container, .sns-container {
   text-align: center;
   width: 240px;
