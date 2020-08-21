@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>毎日検温くんβ</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <!--OGP共通設定(<head>内も含めて）-->
+    <meta property="og:title" content="毎日検温くんβ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ken-on-kun.herokuapp.com/">
+    <meta property="og:image" content="https://ken-on-kun.herokuapp.com/static/ken-on-OGP.png" />
+    <meta property="og:site_name" content="毎日検温くんβ">
+    <meta property="og:description" content="穏やかな日常が戻るまで、日々のお手間を少しずつお手伝いします。体温の記録、ちょこっとメモ、履歴のCSV出力も。" />
+    <!--OGP　Facebook用設定 -->
+    <meta property="fb:admins" content="107923369300430" />
+    <!--OGP　Twitter共通設定 -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@kazuyamano" />
+    <!--レスポンシブ設定-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <!--LINEliffアプリのSDKを取得-->
+    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>  
+  </head>
+  <body>
+    <div class="container">
+      <br>
+      <p align="center">自動でページが移らない時はボタンをクリックしてください</p>
+      <form action="{{ url_for('sort_logs') }}" method=post id='autosend'>
+        <!--LINEプロフィール送信エリア（非表示）-->
+        <input type="hidden" name="line_id" id="line_id-logs">
+        <input type="hidden" name="line_name" id="line_name-logs">
+        <!--以上-->
+        <div class="submit-area">
+          <button type="submit" class="module-button" id="std-btn">履歴を見る</button>
+        </div>
+      </form>
+    </div>
+
+    <script type="text/javascript">
+      setTimeout( function(){
+        document.getElementById('autosend').submit();
+      },1000);
+      //ボタンマウスオーバーで緑を濃く
+      stdbtn.addEventListener("mouseover", function(){ 
+        stdbtn.style.backgroundColor = "#518F74";
+      },false);
+      stdbtn.addEventListener("mouseout", function(){ 
+        stdbtn.style.backgroundColor = "#66AB8D";
+      },false);
+
+
+      // LIFFの初期化を行い、プロフィールを取得、document.querySelectorでHTML内に代入
+      liff
+        .init({
+          liffId: "1654645019-3zWnwABb"
+        })
+        .then(() => {
+          liff.getProfile()
+            .then(profile => {
+              const name = profile.displayName
+              const id = profile.userId
+              document.querySelector("#line_name-entry").value = name ;
+              document.querySelector("#line_name-logs").value = name ;
+              document.querySelector("#line_id-entry").value = id ;
+              document.querySelector("#line_id-logs").value = id ;
+            });
+        })
+        .catch((err) => {
+          // Error happens during initialization
+          console.log(err.code, err.message);
+        });
+    </script>
+  </body>
+</html>
+
+

@@ -31,6 +31,10 @@ def add_entry():
                     .all()
     return flask.render_template('logs-result.html', specified_id=specified_id, specified_name=specified_name, sorted_result=sorted_result)
 
+@app.route('/logs-ent', methods=['GET','POST'])
+def show_logsent():
+    return flask.render_template('logs-ent.html')
+
 @app.route('/logs-result', methods=['GET','post'])
 def sort_logs():
     specified_id = request.form.get('line_id')
