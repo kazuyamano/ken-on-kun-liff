@@ -58,12 +58,18 @@
           <button type="submit" class="module-button" id="std-btn">TOPへ戻る</button>
         </div>
       </form>
+      <form method=post>
+        <div class="submit-area">
+          <button type="submit" class="module-button" id="closeWindowButton">閉じる</button>
+        </div>
+      </form>
     </div>
 
     <script type="text/javascript">
       // ボタンマウスオーバーで緑を濃く
       const dlbtn = document.querySelector("#download-btn");
       const stdbtn = document.querySelector("#std-btn");
+      const closebtn = document.querySelector("#closeWindowButton");
       dlbtn.addEventListener("mouseover", function(){ 
         dlbtn.style.backgroundColor = "#518F74";
       },false);
@@ -76,6 +82,20 @@
       stdbtn.addEventListener("mouseout", function(){ 
         stdbtn.style.backgroundColor = "#66AB8D";
       },false);
+      closebtn.addEventListener("mouseover", function(){ 
+        closebtn.style.backgroundColor = "#518F74";
+      },false);
+      closebtn.addEventListener("mouseout", function(){ 
+        closebtn.style.backgroundColor = "#66AB8D";
+      },false);
+      // liffアプリウィンドウを閉じる
+      document.getElementById('closeWindowButton').addEventListener('click', function() {
+      if (!liff.isInClient()) {
+          sendAlertIfNotInClient();
+      } else {
+        liff.closeWindow();
+      }
+      });
     </script>
   </body>
 </html>
