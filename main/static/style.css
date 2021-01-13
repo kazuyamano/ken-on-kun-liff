@@ -314,7 +314,7 @@ h1 {
   .temp-box {
     flex-wrap: wrap;
   }
-  #enter-btn, #std-btn {
+  #enter-btn, #std-btn, #closeWindowButton {
     max-width: 300px;
     width: 75%;
   }
