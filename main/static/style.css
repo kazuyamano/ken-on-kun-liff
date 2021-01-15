@@ -171,7 +171,7 @@ h1 {
   font-size: 18px;
 }
 .logs-box {
-  height: 220px;
+  height: 200px;
   margin-top: 10px;
   overflow: auto;
 }
@@ -363,8 +363,8 @@ h1 {
     min-width: unset;
     font-size: 14px;
   }
-  #enter-btn, #std-btn {
-    margin-top: 20px;
+  #enter-btn, #std-btn, #closeWindowButton {
+    margin-top: 0px;
   }
   #download-btn {
     font-size: 22px;
