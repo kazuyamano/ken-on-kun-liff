@@ -5,7 +5,7 @@ body {
   font-family: sans-serif;
 }
 h1 {
-  margin: 20px auto;
+  margin: 25px auto;
   text-align: center;
 }
 #top-container {
@@ -171,7 +171,7 @@ h1 {
   font-size: 18px;
 }
 .logs-box {
-  height: 200px;
+  height: 220px;
   margin-top: 10px;
   overflow: auto;
 }
