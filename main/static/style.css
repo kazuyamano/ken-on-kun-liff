@@ -342,6 +342,9 @@ h1 {
     margin: 0px auto;
     padding-top: 0px;
   }
+  #extra-btn {
+    margin-bottom: 10px;
+  }
   .checkbox-set {
     min-width: unset;
     width: 140px;
