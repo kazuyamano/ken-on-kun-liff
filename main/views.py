@@ -51,9 +51,9 @@ def download_csv(key):
     writer = csv.writer(f, quotechar='"', quoting=csv.QUOTE_ALL, lineterminator="\n")
 
     if key == 'all':
-        writer.writerow(['id','line_id','line_name','date','temp','breathlessness','dullness','comment'])
+        writer.writerow(['id','line_name','date','temp','breathlessness','dullness','comment'])
         for i in Entry.query.order_by(Entry.id.desc()).all():
-            writer.writerow([i.id, i.line_id, i.line_name, i.date, i.temp, i.breathlessness, i.dullness, i.comment])
+            writer.writerow([i.id, i.line_name, i.date, i.temp, i.breathlessness, i.dullness, i.comment])
     else:
         writer.writerow(['管理No','LINE名','記録日時','体温','息つらい','体だるい','その他メモ'])
         for i in Entry.query.filter(Entry.line_id == key).order_by(Entry.id.desc()).all():
@@ -73,6 +73,5 @@ def download_csv(key):
 # 'Entry'クラスが持つヘルパー機能のため   Entry.query.all() 　に省略可能
 #   'Entry'         クラス名＝テーブル名
 #   .query          クエリ（指示）
-#   .order_by()     並び順を指定
-#   desc(Entry.date)    'date'カラムの降順で
+#   order_by(Entry.id.desc())   'id'カラムの降順で
 #   .all()          全件取得
